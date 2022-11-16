@@ -1,0 +1,40 @@
+ancestor(serglu).
+
+male(mauris).
+male(milhai).
+male(george).
+male(alex).
+male(andrei).
+
+female(dorina).
+female(irina).
+female(maria).
+female(carmen).
+female(ana).
+female(sara).
+female(ema).
+
+parent(mauris,maria).
+parent(dorina,maria).
+parent(milhal,george).
+parent(irina,george).
+parent(milhal,carmen).
+parent(irina,carmen).
+parent(maria,ana).
+parent(george,ana).
+parent(maria,andrei).
+parent(george,andrei).
+parent(carmen,sara).
+parent(alex,sara).
+parent(carmen,ema).
+parent(alex,ema).
+
+father(X,Y):- male(X),parent(X,Y).
+mother(X,Y):- female(X),parent(X,Y).
+sister(X,Y):- female(X),father(Z,X),father(Z,Y), X\=Y.
+brother(X,Y):- male(X),father(Z,X),father(Z,Y), X\=Y.
+grandfather(X,Y):- male(X),father(Z,Y),father(X,Z).
+grandmother(X,Y):- female(X),father(Z,Y),mother(X,Z).
+uncle(X,Y):- male(X),father(Z,Y),brother(X,Z).
+aunt(X,Y):- uncle(Z,Y),father(Z,W),mother(X,W).
+siblings(X,Y):- parent(Z,X),parent(Z,Y),X\=Y.
